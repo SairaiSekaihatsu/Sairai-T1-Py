@@ -1,6 +1,7 @@
 # Sairai-T1-Py
 
 Simple bot created for learning and testing purpose on https://replit.com/@Sairai/Sairai-T1-Py
+Based on the following tutorial: https://www.freecodecamp.org/news/create-a-discord-bot-with-python/
 
 Invite to your Discord server with the following link:
 https://discord.com/api/oauth2/authorize?client_id=824384631893393448&permissions=24640&scope=bot
