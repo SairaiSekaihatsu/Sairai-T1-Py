@@ -53,6 +53,7 @@ async def on_message(message):
 
     if msg.startswith('$hello'):
         await message.channel.send('```Hello ' + str(message.author) + '!```')
+        return
 
     if msg.startswith('$inspire'):
         quote = get_quote()
