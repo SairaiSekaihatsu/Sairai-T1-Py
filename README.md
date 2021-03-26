@@ -17,7 +17,7 @@ Bot name: **Sairai-T1-Bot#2924**
 * $new <string: encouragement> - Adds new encouragements to the userdefined list
 * $del <int: index>
 * $list - Shows the list of userdefined encouragements
-* $handi - Shows a middle finger
+* $handi - Shows a gesture
 * $handw - Live long and in peace
 * $hando - Look for yourself
 
