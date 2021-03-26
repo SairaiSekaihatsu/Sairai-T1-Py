@@ -54,6 +54,30 @@ async def on_message(message):
     if msg.startswith('$hello'):
         await message.channel.send('```Hello ' + str(message.author) + '!```')
         return
+    
+    if msg.startswith('$looki'):
+        with open('handi.txt', 'r') as file:
+            msg = file.read(1900).strip()
+            while len(msg) > 0:
+                await message.channel.send('```' + msg + '```')
+                msg = file.read(1900).strip()
+        return
+
+    if msg.startswith('$lookw'):
+        with open('handw.txt', 'r') as file:
+            msg = file.read(1900).strip()
+            while len(msg) > 0:
+                await message.channel.send('```' + msg + '```')
+                msg = file.read(1900).strip()
+        return
+    
+    if msg.startswith('$look'):
+        with open('hando.txt', 'r') as file:
+            msg = file.read(1900).strip()
+            while len(msg) > 0:
+                await message.channel.send('```' + msg + '```')
+                msg = file.read(1900).strip()
+        return
 
     if msg.startswith('$inspire'):
         quote = get_quote()
