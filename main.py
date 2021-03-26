@@ -52,7 +52,7 @@ async def on_message(message):
     msg = message.content
 
     if msg.startswith('$hello'):
-        await message.channel.send('```Hello ' + str(message.author) + '!```')
+        await message.channel.send('```Hello ' + str(message.author).split("#")[0] + '!```')
         return
     
     if msg.startswith('$looki'):
