@@ -57,6 +57,7 @@ async def on_message(message):
     if msg.startswith('$inspire'):
         quote = get_quote()
         await message.channel.send('```' + quote + '```')
+        return
 
     if db["responding"]:
         options = starter_encouragements
@@ -65,11 +66,13 @@ async def on_message(message):
 
         if any(word in msg for word in sad_words):
             await message.channel.send('```' + random.choice(options) + '```')
+            return
 
     if msg.startswith("$new"):
         encouraging_message = msg.split("$new ", 1)[1]
         update_encouragements(encouraging_message)
         await message.channel.send("```New encouraging message added.```")
+        return
 
     if msg.startswith("$del"):
         encouragements = []
@@ -78,23 +81,25 @@ async def on_message(message):
             delete_encouragements(index)
             encouragements = db["encouragements"]
         await message.channel.send('```' + str(encouragements) + '```')
+        return
 
     if msg.startswith("$list"):
         encouragements = []
         if "encouragements" in db.keys():
             encouragements = db["encouragements"]
         await message.channel.send('```' + str(encouragements) + '```')
+        return
 
     if msg.startswith("$responding"):
         value = msg.split("$responding ", 1)[1]
 
-    if value.lower() == "true":
-        db["responding"] = True
-        await message.channel.send("```Responding is on.```")
-    else:
-        db["responding"] = False
-        await message.channel.send("```Responding is off.```")
-
+        if value.lower() == "true":
+            db["responding"] = True
+            await message.channel.send("```Responding is on.```")
+        else:
+            db["responding"] = False
+            await message.channel.send("```Responding is off.```")
+        return
 
 keep_alive()
 client.run(os.getenv('TOKEN'))
