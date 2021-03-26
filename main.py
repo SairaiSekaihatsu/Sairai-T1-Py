@@ -52,11 +52,37 @@ async def on_message(message):
     msg = message.content
 
     if msg.startswith('$hello'):
-        await message.channel.send('Hello ' + str(message.author) + '!')
+        await message.channel.send('```Hello ' + str(message.author) + '!```')
+        return
+    
+    if msg.startswith('$looki'):
+        with open('handi.txt', 'r') as file:
+            msg = file.read(1900).strip()
+            while len(msg) > 0:
+                await message.channel.send('```' + msg + '```')
+                msg = file.read(1900).strip()
+        return
+
+    if msg.startswith('$lookw'):
+        with open('handw.txt', 'r') as file:
+            msg = file.read(1900).strip()
+            while len(msg) > 0:
+                await message.channel.send('```' + msg + '```')
+                msg = file.read(1900).strip()
+        return
+    
+    if msg.startswith('$look'):
+        with open('hando.txt', 'r') as file:
+            msg = file.read(1900).strip()
+            while len(msg) > 0:
+                await message.channel.send('```' + msg + '```')
+                msg = file.read(1900).strip()
+        return
 
     if msg.startswith('$inspire'):
         quote = get_quote()
-        await message.channel.send(quote)
+        await message.channel.send('```' + quote + '```')
+        return
 
     if db["responding"]:
         options = starter_encouragements
@@ -64,12 +90,14 @@ async def on_message(message):
             options = options + db["encouragements"]
 
         if any(word in msg for word in sad_words):
-            await message.channel.send(random.choice(options))
+            await message.channel.send('```' + random.choice(options) + '```')
+            return
 
     if msg.startswith("$new"):
         encouraging_message = msg.split("$new ", 1)[1]
         update_encouragements(encouraging_message)
-        await message.channel.send("New encouraging message added.")
+        await message.channel.send("```New encouraging message added.```")
+        return
 
     if msg.startswith("$del"):
         encouragements = []
@@ -77,24 +105,26 @@ async def on_message(message):
             index = int(msg.split("$del ", 1)[1])
             delete_encouragements(index)
             encouragements = db["encouragements"]
-        await message.channel.send(encouragements)
+        await message.channel.send('```' + str(encouragements) + '```')
+        return
 
     if msg.startswith("$list"):
         encouragements = []
         if "encouragements" in db.keys():
             encouragements = db["encouragements"]
-        await message.channel.send(encouragements)
+        await message.channel.send('```' + str(encouragements) + '```')
+        return
 
     if msg.startswith("$responding"):
         value = msg.split("$responding ", 1)[1]
 
-    if value.lower() == "true":
-        db["responding"] = True
-        await message.channel.send("Responding is on")
-    else:
-        db["responding"] = False
-        await message.channel.send("Responding is off.")
-
+        if value.lower() == "true":
+            db["responding"] = True
+            await message.channel.send("```Responding is on.```")
+        else:
+            db["responding"] = False
+            await message.channel.send("```Responding is off.```")
+        return
 
 keep_alive()
 client.run(os.getenv('TOKEN'))
